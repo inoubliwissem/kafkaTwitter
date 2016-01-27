@@ -1,0 +1,42 @@
+program: collect a tweets with apache kafka
+
+Prerequisites:
+=========================================
+java JDK +7
+apache kafka
+maven +2
+=========================================
+create our project with maven tool
+=========================================
+create project maven:
+mvn archetype:generate
+ -DgroupId=com.kafka
+ -DartifactId=kafka
+ -DarchetypeArtifactId=maven-archetype-quickstart
+ -DinteractiveMode=false
+build our project :
+  cd kafka
+  mvn install
+============================================
+Steps to launch apache kafka
+============================================
+0: download apache kafka 
+   cd kafka repository 
+1:start  zookeeper and kafka service
+   bin/zookeeper-server-start.sh config/zookeeper.properties
+   bin/kafka-server-start.sh config/server.properties
+2: create a topic kafka 
+   bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic_name
+****** get list of topic kafka
+   bin/kafka-topics.sh --list --zookeeper localhost:2181
+*****send  msg to tpoc kafka
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+   insert our message in cosole
+****read our msg with produce kafka
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+    
+3: run our produce java kafka  
+============================================
+Steps to run this project
+============================================
+java -jar /target/.. *.jar file
